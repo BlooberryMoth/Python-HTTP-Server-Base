@@ -22,4 +22,7 @@ def handle_POST_request(data: bytes) -> tuple[int, list[tuple[str, str]], str]:
     try: method = data['method']
     except: return error(400, "No method provided.")
 
+    match method:
+        case _: return error(400, "Unknown method.")
+
 def error(status: int, reason: str): return status, [("Content-Type", "application/json")], json.dumps({"error": status, "reason": reason})
