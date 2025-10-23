@@ -54,9 +54,6 @@ match method:
 ```
 
 ## Caveats:
-~~Currently, the code is not able to properly parse non-trailing-slash links.<br>
-<sub>https://thatgalblu.com vs. https://thatgalblu.com/</sub><br>
-Using a non-trailing-slash link will cause relative file paths to break and think that they are one folder above where they actually are.<br>
-You can add a line in the 'Main.py' file to automatically redirect those links to add a slash to the end, or just not use relative file paths, but neither of those options are fun.<br>
-I'll be working on fixing this in the mean time, hopefully it won't take too long to implement!~~<br>
-All fixed :3
+If using a reverse proxy system, files put into the root folder (/http) do not work with relative file paths 100% of the time (e.g "./style.css" or "../../coolpicture.jpg").<br>
+It will instead set "." (the containing folder) to the parent folder, so absolute file paths must be used for the root folder files.<br>
+However all folders inside /http work fine with relative file paths 
