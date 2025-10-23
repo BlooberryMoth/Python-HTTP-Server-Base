@@ -3,10 +3,10 @@ from Main import Server
 
 
 def handle_GET_request(url: list[str], parameters: dict) -> tuple[int, list[tuple[str, str]], str]:
-    file_name, file_format, *_ = url[-1].split('.') + [""]
+    file_name, file_format, *_ = url[-1].split('.') + [""]; url[0] = "." # REQUIRED TO FUNCTION
     if file_format:
         try:
-            with open(f'./http/{"/".join(url)}') as file_in: file = file_in.buffer.read()
+            with open(f'./http/{"/".join(url[:-1])}/{file_name}.{file_format}') as file_in: file = file_in.buffer.read()
             return 200, [], file
         except: return Server.fourohfour
     else:
