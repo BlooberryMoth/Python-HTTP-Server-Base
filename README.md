@@ -11,10 +11,7 @@ int: status,
 list: headers,
 bytes/bytes-like: data
 ```
-<br>
-Here's an example:
-
-`return 200, [("Content-Type", "text/html")], "<html></html>"`<br>
+<sub>Example: `return 200, [("Content-Type", "text/html")], "<html></html>"`</sub><br><br>
 
 You can also return using the built in 'error' function, which you can use by calling it during the return:<br>`return error(200, "Attached message")`
 <br>
