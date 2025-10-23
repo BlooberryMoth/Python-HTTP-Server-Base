@@ -1,5 +1,5 @@
-import json
 from Main import Server
+import json
 
 
 def handle_GET_request(url: list[str], parameters: dict) -> tuple[int, list[tuple[str, str]], str]:
