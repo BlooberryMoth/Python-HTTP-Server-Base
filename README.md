@@ -2,7 +2,7 @@
 A simple base to build off of for any web related shenanigans you could think of!
 
 ## How to use:
-Simply clone the repository and open 'HTTPHandler.py' to find two methods, 'handle_GET_request' and 'handle_POST_request', which you can change to your heart's desire.<br>
+Simply clone the repository and open 'Main.py' to set the name of the port used and the name of the logger, then you can open 'HTTPHandler.py' to find two methods, 'handle_GET_request' and 'handle_POST_request', which you can change to your heart's desire.<br>
 
 ### Handling return data:
 Both methods require you to return the Status Code (i.e 404 or 200), the Headers, and the Data being served to the user; The return is formated as a list:<br>
