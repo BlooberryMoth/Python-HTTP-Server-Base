@@ -1,10 +1,8 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
-from Logging import LOG
+from Logging import LOG; LOG.name = ...
 import HTTPHandler
 
-PORT = 3001
-
-LOG.name = "Image Restaurant"
+PORT = ...
 
 
 class Server(BaseHTTPRequestHandler):
@@ -41,8 +39,8 @@ class Server(BaseHTTPRequestHandler):
 
 
 if __name__ == '__main__':
-    LOG.info("Opening HTTP Server and RESTaurant.")
+    LOG.info("Opening HTTP Server.")
     server = HTTPServer(("0.0.0.0", PORT), Server)
     try: server.serve_forever()
     except Exception as e: print(e)
-    LOG.warning("Closed HTTP Server and RESTaurant.")
+    LOG.warning("Closed HTTP Server.")
