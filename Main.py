@@ -1,8 +1,8 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
-from Logging import LOG; LOG.name = ...
-import HTTPHandler
+from Logging import LOG; LOG.name = "Test"
+import HTTPHandler, re
 
-PORT = ...
+PORT = 2000
 
 
 class Server(BaseHTTPRequestHandler):
@@ -10,7 +10,9 @@ class Server(BaseHTTPRequestHandler):
     fourohfour = 404, [], index
 
     def do_GET(self) -> None:
-        url, pairs = self.path.removeprefix('/').removesuffix('/').split('?') + [""]
+        url, pairs = self.path.split('?') + [""]
+        if re.search("^([^.]*[^/])$", url): self.send_data(308, [("Location", f'{"/".join(self.path.split("?") + [""])}{("?" + pairs) if pairs else ""}')], "")
+        url = url.removeprefix('/').removesuffix('/')
         parameters = {}
         for pair in pairs.split('&'):
             pair = pair.split('=') + [True]

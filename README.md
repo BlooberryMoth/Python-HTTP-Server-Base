@@ -2,7 +2,10 @@
 A simple base to build off of for any web related shenanigans you could think of!
 
 ## How to use:
-Simply clone the repository and open 'Main.py' to set the name of the port used and the name of the logger, then you can open 'HTTPHandler.py' to find two methods, 'handle_GET_request' and 'handle_POST_request', which you can change to your heart's desire.<br>
+Simply clone the repository and open 'Main.py' to set the name of the port used and the name of the logger, then you can open 'HTTPHandler.py' to find two methods, 'handle_GET_request' and 'handle_POST_request', which you can change to your heart's desire.<br><br>
+
+By default, the code will automatically redirect non-trailing-slash URLs. This is to prevent issues with relative pathed imports/files inside any .html and .css files you have.<br>
+It also prevents any URLs from trying to back-track up your file system using "../../"
 
 ### Handling return data:
 Both methods require you to return the Status Code (i.e 404 or 200), the Headers, and the Data being served to the user; The return is formated as a list:<br>
@@ -49,8 +52,3 @@ match method:
     ...
   case _: return error(400, "Unknown method")
 ```
-
-## Caveats:
-If using a reverse proxy system, files put into the root folder (/http) do not work with relative file paths 100% of the time (e.g "./style.css" or "../../coolpicture.jpg").<br>
-It will instead set "." (the containing folder) to the parent folder, so absolute file paths must be used for the root folder files.<br>
-However all folders inside /http work fine with relative file paths.
