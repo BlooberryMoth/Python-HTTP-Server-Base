@@ -1,8 +1,8 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
-from Logging import LOG; LOG.name = "Test"
+from Logging import LOG; LOG.name = ...
 import HTTPHandler, re
 
-PORT = 2000
+PORT = ...
 
 
 class Server(BaseHTTPRequestHandler):
