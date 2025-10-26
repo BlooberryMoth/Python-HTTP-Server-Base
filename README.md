@@ -9,7 +9,7 @@ It also prevents any URLs from trying to back-track up your file system using ".
 
 ### If using a proxy pass:
 There is one line in both 'Main.py' and 'HTTPHandler.py' that you must uncomment if you want to use this as a proxy system.<br>
-The first is the CORS Cross-Origin header that is required by proxy systems when receiving a URL that links back to itself.<br>
+The first is the CORS Allow-Origin header that is required by proxy systems when receiving a URL that links back to itself.<br>
 The second is a simple fix that replaces the leading url segments with "." to force the code to pull files from /http/./ instead of /http/path_to_your_proxy/<br><br>
 
 ### Handling return data:
