@@ -3,7 +3,7 @@ import json
 
 
 def handle_GET_request(url: list[str], parameters: dict) -> tuple[int, list[tuple[str, str]], str]:
-    file_name, file_format, *_ = url[-1].split('.') + [""]; # url[i] = "." # Uncomment this if you are using a proxy system.
+    file_name, file_format, *_ = url[-1].split('.') + [""]; # url[0] = "." # Uncomment this if you are using a proxy system.
     if file_format:
         try:
             with open(f'./http/{"/".join(url)}') as file_in: file = file_in.buffer.read()
