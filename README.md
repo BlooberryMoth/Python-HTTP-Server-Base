@@ -2,13 +2,18 @@
 A simple base to build off of for any web related shenanigans you could think of!
 
 ## How to use:
-Simply clone the repository and open 'Main.py' to set the name of the port used and the name of the logger, then you can open 'HTTPHandler.py' to find two methods, 'handle_GET_request' and 'handle_POST_request', which you can change to your heart's desire.<br><br>
+Simply clone the repository and open 'Main.py' to set the port used and the name of the logger, then you can open 'HTTPHandler.py' to find two methods, 'handle_GET_request' and 'handle_POST_request', which you can change to your heart's desire.<br><br>
 
-By default, the code will automatically redirect non-trailing-slash URLs. This is to prevent issues with relative pathed imports/files inside any .html and .css files you have.<br>
-It also prevents any URLs from trying to back-track up your file system using "../../"
+By default, the code will automatically redirect non-trailing-slash URLs. This is to prevent issues with relative pathed imports/files you might have.<br>
+It also prevents any URLs from trying to back-track up your file system using "../../"<br><br>
+
+### If using a proxy pass:
+There is one line in both 'Main.py' and 'HTTPHandler.py' that you must uncomment if you want to use this as a proxy system.<br>
+The first is the CORS Cross-Origin header that is required by proxy systems when receiving a URL that links back to itself.<br>
+The second is a simple fix that replaces the leading url segments with "." to force the code to pull files from /http/./ instead of /http/path_to_your_proxy/<br><br>
 
 ### Handling return data:
-Both methods require you to return the Status Code (i.e 404 or 200), the Headers, and the Data being served to the user; The return is formated as a list:<br>
+Both methods require you to return the Status Code (i.e 200 or 404), the Headers, and the Data being served to the user; The return is formated as a list:<br>
 ```
 int: status,
 list: headers,
