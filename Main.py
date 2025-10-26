@@ -1,17 +1,17 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
-from Logging import LOG; LOG.name = ...
+from Logging import LOG; LOG.name = ... # Name your logger here
 import HTTPHandler, re
 
-PORT = ...
+PORT = ... # Assign your port here
 
 
 class Server(BaseHTTPRequestHandler):
     with open('./http/404/index.html') as file_in: index = file_in.buffer.read()
-    fourohfour = 404, [], index
+    fourohfour = 404, [], index # This variable is for the default 404 page in "/http/404"
 
     def do_GET(self) -> None:
         url, pairs = self.path.split('?') + [""]
-        if re.search("^([^.]*[^/])$", url): self.send_data(308, [("Location", f'{"/".join(self.path.split("?") + [""])}{("?" + pairs) if pairs else ""}')], "")
+        if re.search("^([^.]*[^/])$", url): return self.send_data(308, [("Location", f'{"/".join(self.path.split("?") + [""])}{("?" + pairs) if pairs else ""}')], "")
         url = url.removeprefix('/').removesuffix('/')
         parameters = {}
         for pair in pairs.split('&'):
@@ -31,7 +31,7 @@ class Server(BaseHTTPRequestHandler):
 
     def send_data(self, status, headers, data) -> None:
         self.send_response(status)
-        self.send_header("Access-Control-Allow-Origin", "*")
+        # self.send_header("Access-Control-Allow-Origin", "*") # Uncomment this if you are using a reverse proxy system.
         for header in headers: self.send_header(*header)
         self.end_headers()
         if not isinstance(data, (bytes, bytearray)): data = bytes(data, 'utf-8')
@@ -44,5 +44,6 @@ if __name__ == '__main__':
     LOG.info("Opening HTTP Server.")
     server = HTTPServer(("0.0.0.0", PORT), Server)
     try: server.serve_forever()
-    except Exception as e: print(e)
+    except KeyboardInterrupt: pass
+    except Exception as e: LOG.critical(e)
     LOG.warning("Closed HTTP Server.")
