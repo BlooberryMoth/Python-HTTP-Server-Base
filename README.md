@@ -2,11 +2,9 @@
 A simple base to build off of for any web related shenanigans you could think of!
 
 ## How to use:
-Simply clone the repository and open 'Main.py' to set the port used and the name of the logger, then you can open 'HTTPHandler.py' to find two methods, 'handle_GET_request' and 'handle_POST_request', which you can change to your heart's desire.<br><br>
-
+Simply clone the repository and open 'Main.py' to set the port used and the name of the logger, then you can open 'HTTPHandler.py' to find two methods, 'handle_GET_request' and 'handle_POST_request', which you can change to your heart's desire.<br>
 By default, the code will automatically redirect non-trailing-slash URLs. This is to prevent issues with relative pathed imports/files you might have.<br>
-It also prevents any URLs from trying to back-track up your file system using "../../"<br><br>
-
+It also prevents any URLs from trying to back-track up your file system using "../../"<br>
 <sub>Note: If you use this with a proxy system, remember to set up the router to add a trailing slash</sub>
 
 ### Handling return data:
