@@ -7,6 +7,8 @@ Simply clone the repository and open 'Main.py' to set the port used and the name
 By default, the code will automatically redirect non-trailing-slash URLs. This is to prevent issues with relative pathed imports/files you might have.<br>
 It also prevents any URLs from trying to back-track up your file system using "../../"<br><br>
 
+<sub>Note: If you use this with a proxy system, remember to set up the router to add a trailing slash</sub>
+
 ### Handling return data:
 Both methods require you to return the Status Code (i.e 200 or 404), the Headers, and the Data being served to the user; The return is formated as a list:<br>
 ```
