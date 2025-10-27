@@ -10,15 +10,15 @@ class Server(BaseHTTPRequestHandler):
     fourohfour = 404, [], index # This variable is for the default 404 page in "/http/404"
 
     def do_GET(self) -> None:
-        url, pairs = self.path.split('?') + [""]
-        if re.search("^([^.]*[^/])$", url): return self.send_data(308, [("Location", f'{"/".join(self.path.split("?") + [""])}{("?" + pairs) if pairs else ""}')], "")
+        url, pairs, *_ = self.path.split('?') + [""]
+        if re.search("^([^.]*[^/])$", url): return self.send_data(308, [("Location", f'./{url.split("/")[-1]}/{("?" + pairs) if pairs else ""}')], "")
         url = url.removeprefix('/').removesuffix('/')
         parameters = {}
         for pair in pairs.split('&'):
             pair = pair.split('=') + [True]
             parameters[pair[0]] = pair[1]
 
-        status, headers, data = HTTPHandler.handle_GET_request(url.lower().split('/'), parameters)
+        status, headers, data = HTTPHandler.handle_GET_request(["."] + url.split('/'), parameters)
         self.send_data(status, headers, data)
 
 
@@ -31,7 +31,6 @@ class Server(BaseHTTPRequestHandler):
 
     def send_data(self, status, headers, data) -> None:
         self.send_response(status)
-        # self.send_header("Access-Control-Allow-Origin", "*") # Uncomment this if you are using a proxy system.
         for header in headers: self.send_header(*header)
         self.end_headers()
         if not isinstance(data, (bytes, bytearray)): data = bytes(data, 'utf-8')
